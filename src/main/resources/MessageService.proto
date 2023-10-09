@@ -4,9 +4,16 @@ option java_multiple_files = false;
 
 package org.example.park;
 
+enum Topic {
+  TOPIC_TECHNOLOGY = 0;
+  TOPIC_AI = 1;
+  TOPIC_LANGUAGE = 2;
+}
+
 message Request {
   int32 id = 1;
   string name = 2;
+  Topic topic = 3;
 }
 
 message Response {

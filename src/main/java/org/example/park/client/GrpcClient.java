@@ -21,23 +21,41 @@ public class GrpcClient {
         // create a client stub
         MessageServiceGrpc.MessageServiceBlockingStub blockingStub = MessageServiceGrpc.newBlockingStub(channel);
 
-        for (int i = 0; i < 5; i++) {
-            // create a request
-            MessageServiceOuterClass.Request request = MessageServiceOuterClass.Request.newBuilder()
-                    .setId((int) (i + 1))
-                    .setName(getRandomName())
-                    .build();
+        // create a request
+        MessageServiceOuterClass.Request request = MessageServiceOuterClass.Request.newBuilder()
+                .setId(1)
+                .setName(getRandomName())
+                .setTopic(MessageServiceOuterClass.Topic.TOPIC_AI)
+                .build();
 
-            // send the request and get the response
-            MessageServiceOuterClass.Response response = blockingStub.sendMessage(request);
+        // send the request and get the response
+        MessageServiceOuterClass.Response response = blockingStub.sendMessage(request);
 
-            // response
-            logger.info("response received from the client: " + response.getMessage());
-            if (i == 5) {
-                break;
-            }
-            TimeUnit.SECONDS.sleep(5);
-        }
+        // response
+        logger.info("response received from the client: " + response.getMessage());
+        TimeUnit.SECONDS.sleep(5);
+
+        request = MessageServiceOuterClass.Request.newBuilder()
+                .setId(2)
+                .setName(getRandomName())
+                .setTopic(MessageServiceOuterClass.Topic.TOPIC_TECHNOLOGY)
+                .build();
+
+        // send the request and get the response
+        response = blockingStub.sendMessage(request);
+
+        // response
+        logger.info("response received from the client: " + response.getMessage());
+        TimeUnit.SECONDS.sleep(5);
+
+        request = MessageServiceOuterClass.Request.newBuilder()
+                .setId(3)
+                .setName(getRandomName())
+                .setTopic(MessageServiceOuterClass.Topic.TOPIC_LANGUAGE)
+                .build();
+
+        // send the request and get the response
+        response = blockingStub.sendMessage(request);
 
 
         // shutdown the channel
