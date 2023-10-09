@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_multiple_files = false;
+
+package org.example.park;
+
+message Request {
+  int32 id = 1;
+  string name = 2;
+}
+
+message Response {
+  string message = 1;
+}
+
+service MessageService {
+  rpc SendMessage(Request) returns (Response);
+}
